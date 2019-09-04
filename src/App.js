@@ -1,25 +1,34 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import All from "./All.jsx"
+import Create from "./Create.jsx"
+import Update from "./Update.jsx"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <div>
+        <Header />
+
+        <Route exact path="/" component={() => <Redirect from="/" to="/products"/>} />
+        <Route exact path="/products/:sku/update" component={Update} />
+        <Route exact path="/products/create" component={Create} />
+        <Route exact path="/products" component={All} />
+      </div>
+    </Router>
+  );
+}
+
+function Header() {
+  return (
+    <ul>
+      <li>
+        <Link to="/products">Listado</Link>
+      </li>
+      <li>
+        <Link to="/products/create">Crear</Link>
+      </li>
+    </ul>
   );
 }
 
