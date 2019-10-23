@@ -12,7 +12,7 @@ export default class Create extends React.Component{
 
   create = (e) => {
     e.preventDefault()
-    const {name, price, stock} = this.state
+    const {sku, name, price, stock} = this.state
     request.product.create({sku, name, price, stock}).then(() => this.props.history.push('/products'))
   }
 
