@@ -4,6 +4,7 @@ import {request} from "./api-client";
 export default class Create extends React.Component{
 
   state = {
+    sku: '',
     name: '',
     stock: '',
     price: ''
@@ -12,13 +13,22 @@ export default class Create extends React.Component{
   create = (e) => {
     e.preventDefault()
     const {name, price, stock} = this.state
-    request.product.create({name, price, stock}).then(() => this.props.history.push('/products'))
+    request.product.create({sku, name, price, stock}).then(() => this.props.history.push('/products'))
   }
 
   render = () => {
     return (
       <div>
         <form onSubmit={(e) => this.create(e)} style={{display: "flex", flexDirection: "column", paddingLeft: 30}}>
+
+          <input
+            style={{maxWidth: 300, marginBottom: 30}}
+            type="sku"
+            value={this.state.sku}
+            onChange={(e) => this.setState({sku: e.target.value})}
+            placeholder="SKU"
+          />
+
           <input
             style={{maxWidth: 300, marginBottom: 30}}
             type="text"
